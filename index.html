@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maria & Ricardo — 21.10.2028</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ivory: #faf7f2;
+    --cream: #f2ece0;
+    --gold: #b89a6a;
+    --gold-light: #d4b896;
+    --dark: #1a1612;
+    --muted: #7a6e63;
+    --border: rgba(184,154,106,0.25);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--ivory);
+    color: var(--dark);
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: center; gap: 3rem;
+    padding: 1.4rem 2rem;
+    background: rgba(250,247,242,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    animation: fadeDown 1s ease both;
+  }
+  nav a {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.68rem; font-weight: 300;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--muted); text-decoration: none;
+    transition: color 0.3s;
+  }
+  nav a:hover { color: var(--gold); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 8rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  #hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 0%, rgba(184,154,106,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 80% 100%, rgba(184,154,106,0.06) 0%, transparent 60%);
+  }
+  .hero-ornament {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.72rem; letter-spacing: 0.3em;
+    color: var(--gold); text-transform: uppercase;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 1.2s ease 0.2s both;
+  }
+  .hero-names {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4.5rem, 12vw, 9rem);
+    font-weight: 300; line-height: 0.9;
+    letter-spacing: -0.01em;
+    animation: fadeUp 1.2s ease 0.4s both;
+  }
+  .hero-names em {
+    font-style: italic; color: var(--gold);
+    display: block; font-size: 0.55em;
+    margin: 0.15em 0;
+    letter-spacing: 0.05em;
+  }
+  .hero-date {
+    font-size: 0.72rem; letter-spacing: 0.35em;
+    color: var(--muted); text-transform: uppercase;
+    margin-top: 2.5rem;
+    animation: fadeUp 1.2s ease 0.6s both;
+  }
+  .hero-line {
+    width: 1px; height: 5rem;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    margin: 2.5rem auto 0;
+    animation: fadeUp 1.2s ease 0.8s both;
+  }
+
+  /* ── COUNTDOWN ── */
+  #countdown {
+    padding: 6rem 2rem;
+    text-align: center;
+    background: var(--dark);
+    color: var(--ivory);
+  }
+  .section-label {
+    font-size: 0.65rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 3rem;
+  }
+  .countdown-grid {
+    display: flex; justify-content: center; gap: 4rem;
+    flex-wrap: wrap;
+  }
+  .countdown-item { display: flex; flex-direction: column; align-items: center; }
+  .countdown-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 8vw, 6rem);
+    font-weight: 300; line-height: 1;
+    color: var(--ivory);
+  }
+  .countdown-label {
+    font-size: 0.6rem; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--gold);
+    margin-top: 0.6rem;
+  }
+  .countdown-sep {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 7vw, 5rem);
+    color: var(--gold); opacity: 0.4;
+    align-self: center; margin-top: -1rem;
+  }
+
+  /* ── STORY ── */
+  #story {
+    padding: 8rem 2rem;
+    max-width: 680px; margin: 0 auto;
+    text-align: center;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    font-weight: 300; font-style: italic;
+    margin-bottom: 2.5rem;
+    line-height: 1.2;
+  }
+  .story-text {
+    font-size: 1rem; line-height: 1.9;
+    color: var(--muted); font-weight: 300;
+  }
+  .divider {
+    display: flex; align-items: center; gap: 1.5rem;
+    margin: 4rem 0;
+    opacity: 0.35;
+  }
+  .divider::before, .divider::after {
+    content: ''; flex: 1;
+    height: 1px; background: var(--gold);
+  }
+  .divider span {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; color: var(--gold);
+  }
+
+  /* ── GIFTS ── */
+  #gifts {
+    padding: 8rem 2rem;
+    background: var(--cream);
+    text-align: center;
+  }
+  .gifts-intro {
+    max-width: 520px; margin: 0 auto 4rem;
+    font-size: 0.95rem; line-height: 1.8; color: var(--muted);
+  }
+  .gifts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    max-width: 900px; margin: 0 auto;
+  }
+  .gift-card {
+    background: var(--ivory);
+    border: 1px solid var(--border);
+    padding: 2.5rem 2rem;
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+  }
+  .gift-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(26,22,18,0.08);
+  }
+  .gift-card-hint {
+    margin-top: 1.2rem;
+    font-size: 0.62rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--gold);
+    opacity: 0.7;
+  }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    display: none;
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(26,22,18,0.6);
+    backdrop-filter: blur(6px);
+    align-items: center; justify-content: center;
+    padding: 2rem;
+  }
+  .modal-overlay.open { display: flex; animation: fadeIn 0.3s ease; }
+  .modal-box {
+    background: var(--ivory);
+    padding: 3rem 2.5rem;
+    max-width: 400px; width: 100%;
+    text-align: center;
+    position: relative;
+    animation: scaleIn 0.3s ease;
+  }
+  .modal-box::before {
+    content: '';
+    position: absolute; inset: 7px;
+    border: 1px solid var(--border);
+    pointer-events: none;
+  }
+  .modal-close {
+    position: absolute; top: 1rem; right: 1.2rem;
+    background: none; border: none; cursor: pointer;
+    font-size: 1.4rem; color: var(--muted);
+    line-height: 1; transition: color 0.2s;
+  }
+  .modal-close:hover { color: var(--dark); }
+  .modal-label {
+    font-size: 0.62rem; letter-spacing: 0.28em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+  .modal-gift-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-style: italic;
+    margin-bottom: 0.3rem;
+  }
+  .modal-gift-price {
+    font-size: 0.8rem; letter-spacing: 0.12em;
+    color: var(--muted); text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+  #qrcode-container {
+    display: flex; justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+  #qrcode-container canvas, #qrcode-container img {
+    border: 6px solid white;
+    box-shadow: 0 4px 20px rgba(26,22,18,0.1);
+  }
+  .modal-pix-key {
+    font-size: 0.75rem; color: var(--muted);
+    margin-bottom: 1.5rem; line-height: 1.6;
+  }
+  .modal-copy-btn {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: var(--dark); color: var(--ivory);
+    border: none; cursor: pointer;
+    padding: 0.85rem 2rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem; font-weight: 300;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    transition: background 0.3s;
+    width: 100%; justify-content: center;
+  }
+  .modal-copy-btn:hover { background: var(--gold); }
+  .modal-copy-btn.copied { background: #5a7a5a; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; } to { opacity: 1; }
+  }
+  @keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.94); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  .gift-icon {
+    font-size: 2rem; margin-bottom: 1.2rem;
+  }
+  .gift-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; font-weight: 400;
+    margin-bottom: 0.5rem;
+  }
+  .gift-price {
+    font-size: 0.75rem; letter-spacing: 0.15em;
+    color: var(--gold); text-transform: uppercase;
+  }
+  .gift-tag {
+    position: absolute; top: 1.2rem; right: 1.2rem;
+    width: 8px; height: 8px;
+    border-radius: 50%; background: var(--gold); opacity: 0.5;
+  }
+
+  /* ── PIX ── */
+  #pix {
+    padding: 8rem 2rem;
+    text-align: center;
+  }
+  .pix-box {
+    max-width: 480px; margin: 3rem auto 0;
+    border: 1px solid var(--border);
+    padding: 3rem 2.5rem;
+    position: relative;
+  }
+  .pix-box::before {
+    content: '';
+    position: absolute; inset: 6px;
+    border: 1px solid var(--border);
+    pointer-events: none;
+  }
+  .pix-label {
+    font-size: 0.65rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 0.8rem;
+  }
+  .pix-key {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-style: italic;
+    margin-bottom: 0.4rem;
+  }
+  .pix-name {
+    font-size: 0.75rem; letter-spacing: 0.1em;
+    color: var(--muted); text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+  .copy-btn {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: var(--dark); color: var(--ivory);
+    border: none; cursor: pointer;
+    padding: 0.85rem 2rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem; font-weight: 300;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    transition: background 0.3s, transform 0.2s;
+  }
+  .copy-btn:hover { background: var(--gold); transform: translateY(-1px); }
+  .copy-btn.copied { background: #5a7a5a; }
+  .pix-note {
+    margin-top: 1.5rem;
+    font-size: 0.8rem; color: var(--muted); line-height: 1.6;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 3rem 2rem;
+    text-align: center;
+    border-top: 1px solid var(--border);
+  }
+  .footer-names {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-style: italic;
+    color: var(--gold); margin-bottom: 0.5rem;
+  }
+  .footer-date {
+    font-size: 0.65rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--muted);
+  }
+
+  /* ── SCROLL ANIMATIONS ── */
+  .reveal {
+    opacity: 0; transform: translateY(32px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: none; }
+  }
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  @media (max-width: 600px) {
+    nav { gap: 1.5rem; }
+    .countdown-grid { gap: 2rem; }
+    .countdown-sep { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#story">Nossa História</a>
+  <a href="#countdown">Data</a>
+  <a href="#gifts">Presentes</a>
+  <a href="#pix">Pix</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <p class="hero-ornament">Casamento</p>
+  <h1 class="hero-names">
+    Maria
+    <em>&amp;</em>
+    Ricardo
+  </h1>
+  <p class="hero-date">21 · Outubro · 2028</p>
+  <div class="hero-line"></div>
+</section>
+
+<!-- COUNTDOWN -->
+<section id="countdown">
+  <p class="section-label">Contagem Regressiva</p>
+  <div class="countdown-grid">
+    <div class="countdown-item">
+      <span class="countdown-num" id="cd-days">—</span>
+      <span class="countdown-label">Dias</span>
+    </div>
+    <div class="countdown-sep">·</div>
+    <div class="countdown-item">
+      <span class="countdown-num" id="cd-hours">—</span>
+      <span class="countdown-label">Horas</span>
+    </div>
+    <div class="countdown-sep">·</div>
+    <div class="countdown-item">
+      <span class="countdown-num" id="cd-mins">—</span>
+      <span class="countdown-label">Minutos</span>
+    </div>
+    <div class="countdown-sep">·</div>
+    <div class="countdown-item">
+      <span class="countdown-num" id="cd-secs">—</span>
+      <span class="countdown-label">Segundos</span>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section id="story">
+  <div class="reveal">
+    <p class="section-label">Nossa História</p>
+    <h2 class="section-title">Uma história que<br>vale a pena contar</h2>
+    <p class="story-text">
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+    </p>
+  </div>
+  <div class="divider"><span>✦</span></div>
+</section>
+
+<!-- GIFTS -->
+<section id="gifts">
+  <div class="reveal">
+    <p class="section-label">Lista de Presentes</p>
+    <h2 class="section-title" style="text-align:center">Com amor, escolhemos<br>alguns desejos</h2>
+    <p class="gifts-intro">
+      A sua presença já é o maior presente. Mas se quiser nos presentear com algo especial, escolhemos algumas ideias com muito carinho.
+    </p>
+    <div class="gifts-grid">
+      <div class="gift-card" onclick="openGift('Adega', 300)">
+        <div class="gift-tag"></div>
+        <div class="gift-icon">🍷</div>
+        <p class="gift-name">Adega</p>
+        <p class="gift-price">R$ 300,00</p>
+        <p class="gift-card-hint">Toque para presentear →</p>
+      </div>
+      <div class="gift-card" onclick="openGift('Geladeira', 10000)">
+        <div class="gift-tag"></div>
+        <div class="gift-icon">❄️</div>
+        <p class="gift-name">Geladeira</p>
+        <p class="gift-price">R$ 10.000,00</p>
+        <p class="gift-card-hint">Toque para presentear →</p>
+      </div>
+      <div class="gift-card" onclick="openGift('Viagem para Paris', 30000)">
+        <div class="gift-tag"></div>
+        <div class="gift-icon">✈️</div>
+        <p class="gift-name">Viagem para Paris</p>
+        <p class="gift-price">R$ 30.000,00</p>
+        <p class="gift-card-hint">Toque para presentear →</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PIX -->
+<section id="pix">
+  <div class="reveal">
+    <p class="section-label">Presentes via Pix</p>
+    <h2 class="section-title">Doe com<br>simplicidade</h2>
+    <div class="pix-box">
+      <p class="pix-label">Chave Pix · E-mail</p>
+      <p class="pix-key"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c8adb0ada5b8a4a788afa5a9a1a4e6aba7a5">[email&#160;protected]</a></p>
+      <p class="pix-name">Maria & Ricardo</p>
+      <button class="copy-btn" id="copyBtn" onclick="copyPix()">
+        <span id="copyIcon">⧉</span>
+        <span id="copyText">Copiar chave Pix</span>
+      </button>
+      <p class="pix-note">
+        Basta copiar a chave acima, abrir o app do seu banco e realizar a transferência. Qualquer valor será recebido com muito amor. 🤍
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- MODAL QR CODE -->
+<div class="modal-overlay" id="giftModal" onclick="closeOnOverlay(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeGift()">✕</button>
+    <p class="modal-label">Presentear com Pix</p>
+    <p class="modal-gift-name" id="modal-name">—</p>
+    <p class="modal-gift-price" id="modal-price">—</p>
+    <div id="qrcode-container"></div>
+    <p class="modal-pix-key">Chave Pix: <strong>exemplo@gmail.com</strong></p>
+    <button class="modal-copy-btn" id="modalCopyBtn" onclick="copyPixModal()">
+      <span id="modalCopyText">Copiar código Pix</span>
+    </button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-names">Maria & Ricardo</p>
+  <p class="footer-date">21 · Outubro · 2028</p>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Countdown
+  const wedding = new Date('2028-10-21T18:00:00');
+  function updateCountdown() {
+    const now = new Date();
+    const diff = wedding - now;
+    if (diff <= 0) {
+      document.getElementById('cd-days').textContent = '0';
+      document.getElementById('cd-hours').textContent = '0';
+      document.getElementById('cd-mins').textContent = '0';
+      document.getElementById('cd-secs').textContent = '0';
+      return;
+    }
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cd-days').textContent = String(d).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-mins').textContent = String(m).padStart(2,'0');
+    document.getElementById('cd-secs').textContent = String(s).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // Copy Pix
+  function copyPix() {
+    navigator.clipboard.writeText('exemplo@gmail.com').then(() => {
+      const btn = document.getElementById('copyBtn');
+      const txt = document.getElementById('copyText');
+      btn.classList.add('copied');
+      txt.textContent = 'Chave copiada! ✓';
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        txt.textContent = 'Copiar chave Pix';
+      }, 2500);
+    });
+  }
+
+  // ── PIX PAYLOAD ──
+  const PIX_KEY = 'exemplo@gmail.com';
+  const PIX_NAME = 'Maria Ricardo';
+  const PIX_CITY = 'Sao Paulo';
+  let currentPixPayload = '';
+
+  function crc16(str) {
+    let crc = 0xFFFF;
+    for (let i = 0; i < str.length; i++) {
+      crc ^= str.charCodeAt(i) << 8;
+      for (let j = 0; j < 8; j++) {
+        crc = (crc & 0x8000) ? (crc << 1) ^ 0x1021 : crc << 1;
+      }
+    }
+    return (crc & 0xFFFF).toString(16).toUpperCase().padStart(4, '0');
+  }
+
+  function tlv(id, value) {
+    return id + String(value.length).padStart(2, '0') + value;
+  }
+
+  function generatePix(key, name, city, amount) {
+    const merchantAccount = tlv('26',
+      tlv('00', 'br.gov.bcb.pix') + tlv('01', key)
+    );
+    const amountStr = tlv('54', amount.toFixed(2));
+    const additionalData = tlv('62', tlv('05', 'PRESENTE'));
+    const payload =
+      tlv('00', '01') +
+      merchantAccount +
+      tlv('52', '0000') +
+      tlv('53', '986') +
+      amountStr +
+      tlv('58', 'BR') +
+      tlv('59', name.substring(0, 25)) +
+      tlv('60', city.substring(0, 15)) +
+      additionalData +
+      '6304';
+    return payload + crc16(payload);
+  }
+
+  // ── MODAL ──
+  function openGift(name, amount) {
+    document.getElementById('modal-name').textContent = name;
+    document.getElementById('modal-price').textContent =
+      'R$ ' + amount.toLocaleString('pt-BR', {minimumFractionDigits: 2});
+
+    const container = document.getElementById('qrcode-container');
+    container.innerHTML = '';
+
+    currentPixPayload = generatePix(PIX_KEY, PIX_NAME, PIX_CITY, amount);
+
+    // Draw QR using canvas
+    renderQR(currentPixPayload, container);
+
+    document.getElementById('giftModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeGift() {
+    document.getElementById('giftModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function closeOnOverlay(e) {
+    if (e.target === document.getElementById('giftModal')) closeGift();
+  }
+
+  function copyPixModal() {
+    navigator.clipboard.writeText(currentPixPayload).then(() => {
+      const btn = document.getElementById('modalCopyBtn');
+      const txt = document.getElementById('modalCopyText');
+      btn.classList.add('copied');
+      txt.textContent = 'Código copiado! ✓';
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        txt.textContent = 'Copiar código Pix';
+      }, 2500);
+    });
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeGift(); });
+
+  // ── QR CODE RENDERER (pure JS, no library) ──
+  function renderQR(text, container) {
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
+    script.onload = () => {
+      new QRCode(container, {
+        text: text,
+        width: 200, height: 200,
+        colorDark: '#1a1612', colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.M
+      });
+    };
+    if (window.QRCode) {
+      new QRCode(container, {
+        text: text,
+        width: 200, height: 200,
+        colorDark: '#1a1612', colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.M
+      });
+    } else {
+      document.head.appendChild(script);
+    }
+  }
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries
